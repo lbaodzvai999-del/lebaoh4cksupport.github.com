@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baoh4cksupport - Cyber Hub</title>
+    <title>Baoiuhvy168 - Elite Command Center</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 
         * {
             margin: 0;
@@ -16,197 +16,213 @@
         }
 
         body {
-            background-color: #050508;
-            color: #f3e8ff;
+            background-color: #030305;
+            color: #e2e8f0;
             min-height: 100vh;
+            display: flex;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(147, 51, 234, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 40%);
-            padding-bottom: 60px;
+                radial-gradient(circle at 80% 10%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 20% 90%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
         }
 
-        /* Header sáng tạo */
-        header {
+        /* Sidebar Điều Hướng Đẳng Cấp */
+        sidebar {
+            width: 280px;
+            background: rgba(10, 10, 18, 0.85);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: rgba(11, 9, 20, 0.7);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(192, 132, 252, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            padding: 35px 25px;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
         }
 
-        .logo-area {
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #a855f7, #38bdf8, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 14px 18px;
+            border-radius: 14px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 12px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #c084fc, #38bdf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(192, 132, 252, 0.4);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .search-box {
+        .nav-item:hover, .nav-item.active {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(56, 189, 248, 0.1));
+            color: #fff;
+            border-left: 4px solid #a855f7;
+            transform: translateX(4px);
+        }
+
+        .admin-trigger {
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+        }
+
+        .admin-trigger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(124, 58, 237, 0.6);
+        }
+
+        /* Khu Vực Nội Dung Chính */
+        main {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 40px 50px;
+            max-width: calc(100vw - 280px);
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+
+        .search-container {
             position: relative;
-            width: 400px;
+            width: 450px;
         }
 
-        .search-box input {
+        .search-container input {
             width: 100%;
-            padding: 12px 20px 12px 45px;
-            background: rgba(23, 16, 46, 0.6);
-            border: 1px solid rgba(192, 132, 252, 0.3);
-            border-radius: 30px;
+            padding: 14px 20px 14px 48px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
             color: #fff;
             outline: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: 0.3s;
         }
 
-        .search-box input:focus {
-            border-color: #c084fc;
-            box-shadow: 0 0 20px rgba(192, 132, 252, 0.3);
-            background: rgba(23, 16, 46, 0.9);
+        .search-container input:focus {
+            border-color: #a855f7;
+            background: rgba(10, 10, 18, 0.8);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
         }
 
-        .search-box i {
+        .search-container i {
             position: absolute;
             left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: #c084fc;
+            color: #a855f7;
         }
 
-        .admin-btn {
-            background: linear-gradient(135deg, #7c3aed, #2563eb);
-            color: white;
-            border: none;
-            padding: 10px 22px;
+        .user-love-badge {
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            padding: 10px 20px;
             border-radius: 30px;
+            font-size: 13px;
             font-weight: 600;
-            cursor: pointer;
+            color: #f472b6;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-        }
-
-        .admin-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
-        }
-
-        /* Danh mục bộ lọc */
-        .filters {
-            display: flex;
-            gap: 12px;
-            padding: 30px 50px 20px 50px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .filter-btn {
-            background: rgba(23, 16, 46, 0.5);
-            color: #d8b4fe;
-            border: 1px solid rgba(192, 132, 252, 0.2);
-            padding: 10px 24px;
-            border-radius: 14px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
 
-        .filter-btn.active, .filter-btn:hover {
-            background: linear-gradient(135deg, #7c3aed, #a855f7);
-            color: #fff;
-            border-color: #c084fc;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* Lưới hiển thị Card sáng tạo */
-        .container {
+        /* Lưới Thẻ Card Phong Cách Hologram */
+        .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
             gap: 25px;
-            padding: 0 50px;
-            max-width: 1400px;
-            margin: 0 auto;
         }
 
-        .card {
-            background: rgba(19, 15, 34, 0.7);
+        .script-card {
+            background: rgba(15, 15, 25, 0.6);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(192, 132, 252, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             padding: 25px;
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            animation: fadeIn 0.6s ease-out forwards;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            animation: slideUp 0.5s ease-out forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, #38bdf8, #c084fc, #f472b6);
-            opacity: 0;
-            transition: 0.3s;
+        .script-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.15);
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(192, 132, 252, 0.6);
-            box-shadow: 0 15px 35px rgba(147, 51, 234, 0.2);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .badge {
+        .card-tag {
             display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: #38bdf8;
+            background: rgba(168, 85, 247, 0.1);
+            color: #d8b4fe;
             font-size: 11px;
             font-weight: 700;
             padding: 6px 14px;
-            border-radius: 20px;
+            border-radius: 8px;
             margin-bottom: 15px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(168, 85, 247, 0.2);
             letter-spacing: 0.5px;
         }
 
-        .card-title {
+        .card-heading {
             font-family: 'Orbitron', sans-serif;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             margin-bottom: 15px;
             color: #fff;
         }
 
-        .code-box {
-            background: rgba(5, 5, 8, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 12px 15px;
-            border-radius: 10px;
+        .terminal-box {
+            background: #050508;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 14px;
+            border-radius: 12px;
             font-family: monospace;
             font-size: 13px;
             color: #38bdf8;
@@ -215,154 +231,190 @@
             margin-bottom: 20px;
         }
 
-        .code-box::-webkit-scrollbar { height: 4px; }
-        .code-box::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 2px; }
+        .terminal-box::-webkit-scrollbar { height: 3px; }
+        .terminal-box::-webkit-scrollbar-thumb { background: #7c3aed; }
 
-        .card-footer {
+        .card-bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
             padding-top: 15px;
-            font-size: 13px;
-            color: #94a3b8;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 15px;
         }
 
-        .btn-copy {
+        .btn-action-copy {
             width: 100%;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            background: linear-gradient(135deg, #0284c7, #0369a1);
             color: white;
             border: none;
             padding: 12px;
             border-radius: 12px;
-            cursor: pointer;
             font-weight: 600;
-            margin-top: 15px;
+            cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
         }
 
-        .btn-copy:hover {
+        .btn-action-copy:hover {
+            background: linear-gradient(135deg, #0369a1, #075985);
             transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
-            background: linear-gradient(135deg, #2563eb, #1e40af);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
         }
 
-        /* Modal */
-        .modal {
+        /* Modal Phong Cách Tương Lai */
+        .modal-backdrop {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 5, 8, 0.85);
-            backdrop-filter: blur(10px);
+            background: rgba(3, 3, 5, 0.85);
+            backdrop-filter: blur(15px);
             justify-content: center;
             align-items: center;
-            z-index: 2000;
+            z-index: 1000;
         }
 
-        .modal-content {
-            background: #130f22;
-            border: 1px solid rgba(192, 132, 252, 0.4);
+        .modal-box {
+            background: #0f0f19;
+            border: 1px solid rgba(168, 85, 247, 0.4);
             padding: 35px;
             border-radius: 24px;
-            width: 420px;
+            width: 450px;
             max-width: 90%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
         }
 
-        @keyframes zoomIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        .modal-box h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #a855f7;
+            margin-bottom: 20px;
+            font-size: 18px;
         }
 
-        .modal-content h3 { margin-bottom: 20px; color: #c084fc; font-family: 'Orbitron', sans-serif; }
-        .modal-content input, .modal-content select, .modal-content textarea {
+        .modal-box input, .modal-box select, .modal-box textarea {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px;
             margin-bottom: 15px;
-            background: rgba(5, 5, 8, 0.8);
-            border: 1px solid rgba(192, 132, 252, 0.2);
+            background: #030305;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: #fff;
             border-radius: 12px;
             outline: none;
         }
-        .modal-content input:focus, .modal-content textarea:focus { border-color: #c084fc; }
 
-        .modal-actions { display: flex; gap: 12px; }
-        .modal-actions button { flex: 1; padding: 12px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-submit { background: #22c55e; color: white; }
-        .btn-submit:hover { background: #16a34a; }
-        .btn-close { background: #ef4444; color: white; }
-        .btn-close:hover { background: #dc2626; }
+        .modal-box input:focus, .modal-box textarea:focus {
+            border-color: #a855f7;
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-btns button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-confirm { background: #10b981; color: white; }
+        .btn-confirm:hover { background: #059669; }
+        .btn-cancel { background: #ef4444; color: white; }
+        .btn-cancel:hover { background: #dc2626; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-area">
-            <i class="fa-solid fa-meteor"></i>
-            <span>BAOH4CK-HUB</span>
+    <!-- Sidebar Trái -->
+    <sidebar>
+        <div>
+            <div class="brand-box">
+                <i class="fa-solid fa-atom"></i>
+                <span>BAOIUHVY HUB</span>
+            </div>
+            <div class="nav-menu">
+                <button class="nav-item active" onclick="playClickSound(); filterCategory('Tất cả', this)">
+                    <i class="fa-solid fa-globe"></i> Tất cả Script
+                </button>
+                <button class="nav-item" onclick="playClickSound(); filterCategory('ROBLOX', this)">
+                    <i class="fa-solid fa-gamepad"></i> Roblox Hub
+                </button>
+                <button class="nav-item" onclick="playClickSound(); filterCategory('TOOL', this)">
+                    <i class="fa-solid fa-code"></i> Hệ thống Tool
+                </button>
+            </div>
         </div>
-        <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Tìm kiếm script thần tốc..." onkeyup="searchScripts()">
+        <button class="admin-trigger" onclick="playClickSound(); checkAdmin();">
+            <i class="fa-solid fa-fingerprint"></i> Admin Portal
+        </button>
+    </sidebar>
+
+    <!-- Main Content -->
+    <main>
+        <div class="top-bar">
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Tìm kiếm mã lệnh nhanh chóng..." onkeyup="searchScripts()">
+            </div>
+            <div class="user-love-badge">
+                <i class="fa-solid fa-heart" style="color: #ec4899;"></i> Dedicated to Vy (168)
+            </div>
         </div>
-        <div class="header-right">
-            <button class="admin-btn" onclick="playClickSound(); checkAdmin();">
-                <i class="fa-solid fa-shield-halved"></i> Admin Login
-            </button>
-        </div>
-    </header>
 
-    <div class="filters">
-        <button class="filter-btn active" onclick="playClickSound(); filterCategory('Tất cả', this)">Tất cả</button>
-        <button class="filter-btn" onclick="playClickSound(); filterCategory('ROBLOX', this)">Roblox</button>
-        <button class="filter-btn" onclick="playClickSound(); filterCategory('TOOL', this)">Tool</button>
-    </div>
+        <div class="grid-container" id="scriptContainer"></div>
+    </main>
 
-    <div class="container" id="scriptContainer"></div>
-
-    <div class="modal" id="adminModal">
-        <div class="modal-content">
-            <h3>ĐĂNG SCRIPT MỚI</h3>
-            <input type="text" id="scriptTitle" placeholder="Tên Script (VD: Blox Fruits Op)">
+    <!-- Modal Admin -->
+    <div class="modal-backdrop" id="adminModal">
+        <div class="modal-box">
+            <h3>ĐĂNG TẢI SCRIPT MỚI</h3>
+            <input type="text" id="scriptTitle" placeholder="Tiêu đề Script (VD: Blox Fruits Supreme)">
             <select id="scriptCategory">
                 <option value="ROBLOX - BLOX FRUITS">ROBLOX - BLOX FRUITS</option>
                 <option value="ROBLOX - KHÁC">ROBLOX - KHÁC</option>
                 <option value="TOOL - HỆ THỐNG">TOOL - HỆ THỐNG</option>
             </select>
-            <textarea id="scriptCode" placeholder="Dán mã Loadstring vào đây..." rows="3"></textarea>
-            <div class="modal-actions">
-                <button class="btn-submit" onclick="playClickSound(); addNewScript()">Đăng Bài</button>
-                <button class="btn-close" onclick="playClickSound(); closeModal()">Hủy</button>
+            <textarea id="scriptCode" placeholder="Dán mã Loadstring..." rows="3"></textarea>
+            <div class="modal-btns">
+                <button class="btn-confirm" onclick="playClickSound(); addNewScript()">Xác Nhận</button>
+                <button class="btn-cancel" onclick="playClickSound(); closeModal()">Đóng</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Mật khẩu đặc biệt thể hiện tình yêu của bạn
+        // Mật khẩu quản trị tình yêu
         const ADMIN_PASSWORD = "baoiuhvy168";
 
-        // Tích hợp âm thanh tương tác (Web Audio API - Không cần file ngoài)
+        // Âm thanh tương tác công nghệ cao (Web Audio API)
         function playClickSound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // Nốt D5
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
-                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.05);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
                 osc.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.08);
+                osc.stop(audioCtx.currentTime + 0.05);
             } catch(e) {}
         }
 
-        let scripts = JSON.parse(localStorage.getItem('my_scripts_pro')) || [
+        let scripts = JSON.parse(localStorage.getItem('elite_scripts_v2')) || [
             { title: "Evomon Ultimate Hub", category: "ROBLOX - BLOX FRUITS", code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/zenike/..."))()' }
         ];
 
@@ -371,19 +423,19 @@
             container.innerHTML = "";
             data.forEach((item) => {
                 container.innerHTML += `
-                    <div class="card">
+                    <div class="script-card">
                         <div>
-                            <span class="badge">${item.category}</span>
-                            <div class="card-title">${item.title}</div>
-                            <div class="code-box">${item.code}</div>
+                            <span class="card-tag">${item.category}</span>
+                            <div class="card-heading">${item.title}</div>
+                            <div class="terminal-box">${item.code}</div>
                         </div>
                         <div>
-                            <div class="card-footer">
-                                <span><i class="fa-regular fa-eye"></i> Tương tác mượt</span>
-                                <span style="color: #c084fc; font-weight: 600;">Active</span>
+                            <div class="card-bottom">
+                                <span><i class="fa-solid fa-shield-cat"></i> Secure Verified</span>
+                                <span style="color: #10b981; font-weight: 600;">Online</span>
                             </div>
-                            <button class="btn-copy" onclick="playClickSound(); copyCode('${item.code}', this)">
-                                <i class="fa-regular fa-copy"></i> Sao chép mã
+                            <button class="btn-action-copy" onclick="playClickSound(); copyCode('${item.code}', this)">
+                                <i class="fa-regular fa-clone"></i> Sao Chép Mã Lệnh
                             </button>
                         </div>
                     </div>
@@ -392,11 +444,11 @@
         }
 
         function checkAdmin() {
-            let pass = prompt("Nhập mật khẩu quản trị (Bí mật tình yêu ❤️):");
+            let pass = prompt("Nhập mật khẩu quản trị hệ thống:");
             if (pass === ADMIN_PASSWORD) {
                 document.getElementById('adminModal').style.display = 'flex';
             } else if (pass !== null) {
-                alert("Sai mật khẩu rồi bạn ơi!");
+                alert("Mật khẩu không chính xác!");
             }
         }
 
@@ -410,12 +462,12 @@
             let code = document.getElementById('scriptCode').value;
 
             if(!title || !code) {
-                alert("Vui lòng điền đủ thông tin!");
+                alert("Vui lòng điền đầy đủ các mục!");
                 return;
             }
 
             scripts.unshift({ title, category, code });
-            localStorage.setItem('my_scripts_pro', JSON.stringify(scripts));
+            localStorage.setItem('elite_scripts_v2', JSON.stringify(scripts));
             renderScripts();
             closeModal();
             
@@ -426,11 +478,11 @@
         function copyCode(text, btn) {
             navigator.clipboard.writeText(text);
             let originalHTML = btn.innerHTML;
-            btn.innerHTML = `<i class="fa-solid fa-check"></i> Đã sao chép thành công!`;
-            btn.style.background = "linear-gradient(135deg, #16a34a, #15803d)";
+            btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Đã sao chép thành công!`;
+            btn.style.background = "linear-gradient(135deg, #059669, #047857)";
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
-                btn.style.background = "linear-gradient(135deg, #3b82f6, #1d4ed8)";
+                btn.style.background = "linear-gradient(135deg, #0284c7, #0369a1)";
             }, 1800);
         }
 
@@ -441,7 +493,7 @@
         }
 
         function filterCategory(cat, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             if(cat === 'Tất cả') {
                 renderScripts();
