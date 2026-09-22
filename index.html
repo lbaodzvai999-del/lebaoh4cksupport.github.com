@@ -14,8 +14,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
+            background-color: #0b0914; /* Nền tối chuyển sang sắc thái tím đen sâu thẳm */
+            color: #f3e8ff;
             line-height: 1.6;
         }
         header {
@@ -23,26 +23,27 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 50px;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(11, 9, 20, 0.9);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid #2e1065;
         }
         .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #38bdf8;
+            color: #c084fc; /* Màu chữ logo tím sáng */
+            text-shadow: 0 0 10px rgba(192, 132, 252, 0.3);
         }
         nav a {
-            color: #cbd5e1;
+            color: #d8b4fe;
             text-decoration: none;
             margin-left: 25px;
             transition: 0.3s;
         }
         nav a:hover {
-            color: #38bdf8;
+            color: #e879f9; /* Hiệu ứng hover chuyển sang hồng tím */
         }
         .hero {
             height: 100vh;
@@ -52,34 +53,37 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.8), #0f172a);
+            /* Hiệu ứng chuyển màu nền từ tím đậm sang tối */
+            background: linear-gradient(to bottom, rgba(76, 29, 149, 0.4), #0b0914);
         }
         .hero h1 {
             font-size: 48px;
             margin-bottom: 20px;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
+            /* Chữ đổi màu gradient từ tím sáng sang hồng rực */
+            background: linear-gradient(to right, #c084fc, #f472b6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .hero p {
             font-size: 18px;
-            color: #94a3b8;
+            color: #d8b4fe;
             max-width: 600px;
             margin-bottom: 30px;
         }
         .btn {
-            background-color: #38bdf8;
-            color: #0f172a;
+            background: linear-gradient(135deg, #9333ea, #c084fc); /* Nút bấm hiệu ứng gradient tím */
+            color: #ffffff;
             padding: 12px 30px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.5);
         }
         .btn:hover {
-            background-color: #0ea5e9;
+            background: linear-gradient(135deg, #7e22ce, #a855f7);
             transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(147, 51, 234, 0.7);
         }
         .features {
             display: grid;
@@ -90,35 +94,37 @@
             margin: 0 auto;
         }
         .card {
-            background: #1e293b;
+            background: #17102e; /* Khung thẻ màu tím than */
             padding: 30px;
             border-radius: 15px;
-            border: 1px solid #334155;
+            border: 1px solid #3b0764;
             transition: 0.3s;
         }
         .card:hover {
             transform: translateY(-5px);
-            border-color: #38bdf8;
+            border-color: #c084fc; /* Viền sáng lên khi di chuột vào */
+            box-shadow: 0 5px 20px rgba(192, 132, 252, 0.15);
         }
         .card i {
             font-size: 36px;
-            color: #38bdf8;
+            color: #c084fc; /* Icon màu tím sáng */
             margin-bottom: 15px;
         }
         .card h3 {
             margin-bottom: 10px;
             font-size: 20px;
+            color: #f3e8ff;
         }
         .card p {
-            color: #94a3b8;
+            color: #c4b5fd;
             font-size: 14px;
         }
         footer {
             text-align: center;
             padding: 30px;
-            background: #090d16;
-            color: #64748b;
-            border-top: 1px solid #1e293b;
+            background: #05030a;
+            color: #a78bfa;
+            border-top: 1px solid #2e1065;
         }
     </style>
 </head>
@@ -136,7 +142,7 @@
 
     <section class="hero">
         <h1>Nâng Tầm Trải Nghiệm Website Của Bạn</h1>
-        <p>Trang web này đã được thiết kế lại với giao diện hiện đại, tối ưu tốc độ và hiển thị mượt mà trên mọi thiết bị di động cũng như máy tính.</p>
+        <p>Trang web này đã được phối lại với tông màu tím chủ đạo huyền ảo, tối ưu tốc độ và hiển thị mượt mà trên mọi thiết bị.</p>
         <a href="#" class="btn">Khám phá ngay</a>
     </section>
 
@@ -154,12 +160,12 @@
         <div class="card">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
             <h3>Giao diện hiện đại</h3>
-            <p>Phong cách thiết kế Dark Mode xu hướng mới, sang trọng và bắt mắt.</p>
+            <p>Phong cách thiết kế Dark Mode màu tím huyền bí, sang trọng và bắt mắt.</p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Trang web của tôi. Được lưu trữ trên GitHub Pages.</p>
+        <p>&copy; 2026 Baoh4cksupport. Được lưu trữ trên GitHub Pages.</p>
     </footer>
 
 </body>
