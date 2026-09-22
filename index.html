@@ -3,22 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang web của tôi</title>
+    <title>Trang Web Đẳng Cấp Của Tôi</title>
+    <!-- Sử dụng thư viện icon FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f9;
-            color: #333;
-            margin-top: 100px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        h1 {
-            color: #0066cc;
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            line-height: 1.6;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(15, 23, 42, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #1e293b;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #38bdf8;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.8), #0f172a);
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #94a3b8;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+        }
+        .btn:hover {
+            background-color: #0ea5e9;
+            transform: translateY(-2px);
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 80px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #334155;
+            transition: 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+        }
+        .card i {
+            font-size: 36px;
+            color: #38bdf8;
+            margin-bottom: 15px;
+        }
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .card p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #090d16;
+            color: #64748b;
+            border-top: 1px solid #1e293b;
         }
     </style>
 </head>
 <body>
-    <h1>Xin chào! Chào mừng đếnกับ trang web của tôi 🎉</h1>
-    <p>Trang web này được lưu trữ miễn phí trên GitHub Pages.</p>
+
+    <header>
+        <div class="logo">MyBrand</div>
+        <nav>
+            <a href="#">Trang chủ</a>
+            <a href="#">Tính năng</a>
+            <a href="#">Giới thiệu</a>
+            <a href="#">Liên hệ</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Nâng Tầm Trải Nghiệm Website Của Bạn</h1>
+        <p>Trang web này đã được thiết kế lại với giao diện hiện đại, tối ưu tốc độ và hiển thị mượt mà trên mọi thiết bị di động cũng như máy tính.</p>
+        <a href="#" class="btn">Khám phá ngay</a>
+    </section>
+
+    <section class="features">
+        <div class="card">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>Tốc độ cực nhanh</h3>
+            <p>Được tối ưu hóa mã nguồn giúp tải trang trong tích tắc, mang lại trải nghiệm tuyệt vời cho người xem.</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Bảo mật tối ưu</h3>
+            <p>Sử dụng chứng chỉ SSL an toàn tuyệt đối, bảo vệ thông tin người dùng hiệu quả.</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <h3>Giao diện hiện đại</h3>
+            <p>Phong cách thiết kế Dark Mode xu hướng mới, sang trọng và bắt mắt.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Trang web của tôi. Được lưu trữ trên GitHub Pages.</p>
+    </footer>
+
 </body>
 </html>
