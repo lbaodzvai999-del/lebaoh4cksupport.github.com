@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baoh4cksupport</title>
+    <title>Baoh4cksupport - Script Hub</title>
     <!-- Sử dụng thư viện icon FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,159 +14,301 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #0b0914; /* Nền tối chuyển sang sắc thái tím đen sâu thẳm */
+            background-color: #0b0914;
             color: #f3e8ff;
-            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 50px;
         }
+        /* Header & Navbar */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
-            background: rgba(11, 9, 20, 0.9);
-            position: fixed;
-            width: 100%;
+            padding: 15px 30px;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid #2e1065;
+            position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid #2e1065;
         }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #c084fc; /* Màu chữ logo tím sáng */
-            text-shadow: 0 0 10px rgba(192, 132, 252, 0.3);
-        }
-        nav a {
-            color: #d8b4fe;
-            text-decoration: none;
-            margin-left: 25px;
-            transition: 0.3s;
-        }
-        nav a:hover {
-            color: #e879f9; /* Hiệu ứng hover chuyển sang hồng tím */
-        }
-        .hero {
-            height: 100vh;
+        .logo-area {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            /* Hiệu ứng chuyển màu nền từ tím đậm sang tối */
-            background: linear-gradient(to bottom, rgba(76, 29, 149, 0.4), #0b0914);
-        }
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            /* Chữ đổi màu gradient từ tím sáng sang hồng rực */
-            background: linear-gradient(to right, #c084fc, #f472b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero p {
-            font-size: 18px;
-            color: #d8b4fe;
-            max-width: 600px;
-            margin-bottom: 30px;
-        }
-        .btn {
-            background: linear-gradient(135deg, #9333ea, #c084fc); /* Nút bấm hiệu ứng gradient tím */
-            color: #ffffff;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
+            gap: 10px;
+            font-size: 20px;
             font-weight: bold;
+            color: #c084fc;
+        }
+        .search-box {
+            position: relative;
+            width: 350px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            background: #17102e;
+            border: 1px solid #3b0764;
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
             transition: 0.3s;
-            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.5);
         }
-        .btn:hover {
-            background: linear-gradient(135deg, #7e22ce, #a855f7);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(147, 51, 234, 0.7);
+        .search-box input:focus {
+            border-color: #c084fc;
+            box-shadow: 0 0 10px rgba(192, 132, 252, 0.2);
         }
-        .features {
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+        .header-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .icon-btn {
+            background: #17102e;
+            border: 1px solid #3b0764;
+            color: #f3e8ff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .icon-btn:hover {
+            border-color: #c084fc;
+        }
+        .admin-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Filter Categories */
+        .filters {
+            display: flex;
+            gap: 10px;
+            padding: 20px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: #17102e;
+            color: #d8b4fe;
+            border: 1px solid #3b0764;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #3b0764;
+            color: #fff;
+            border-color: #c084fc;
+        }
+
+        /* Grid Cards */
+        .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 80px 50px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 20px;
+            padding: 0 30px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         .card {
-            background: #17102e; /* Khung thẻ màu tím than */
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid #3b0764;
+            background: #130f22;
+            border: 1px solid #2e1065;
+            border-radius: 12px;
+            padding: 20px;
             transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .card:hover {
-            transform: translateY(-5px);
-            border-color: #c084fc; /* Viền sáng lên khi di chuột vào */
-            box-shadow: 0 5px 20px rgba(192, 132, 252, 0.15);
+            border-color: #c084fc;
+            box-shadow: 0 5px 15px rgba(147, 51, 234, 0.15);
         }
-        .card i {
-            font-size: 36px;
-            color: #c084fc; /* Icon màu tím sáng */
+        .badge {
+            display: inline-block;
+            background: #1e1b4b;
+            color: #818cf8;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            border: 1px solid #312e81;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #f8fafc;
+        }
+        .code-box {
+            background: #090710;
+            border: 1px solid #1e1b4b;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #38bdf8;
+            white-space: nowrap;
+            overflow-x: auto;
             margin-bottom: 15px;
         }
-        .card h3 {
-            margin-bottom: 10px;
-            font-size: 20px;
-            color: #f3e8ff;
+        .code-box::-webkit-scrollbar {
+            height: 4px;
         }
-        .card p {
-            color: #c4b5fd;
-            font-size: 14px;
+        .code-box::-webkit-scrollbar-thumb {
+            background: #4c1d95;
+            border-radius: 2px;
         }
-        footer {
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #1e1b4b;
+            padding-top: 12px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .btn-view {
+            flex: 1;
+            background: #1e1b4b;
+            color: #c084fc;
+            border: 1px solid #4c1d95;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
             text-align: center;
-            padding: 30px;
-            background: #05030a;
-            color: #a78bfa;
-            border-top: 1px solid #2e1065;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-view:hover {
+            background: #312e81;
+        }
+        .btn-copy {
+            flex: 1;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-copy:hover {
+            background: #1d4ed8;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header -->
     <header>
-        <div class="logo">Baoh4cksupport</div>
-        <nav>
-            <a href="#">Trang chủ</a>
-            <a href="#">Tính năng</a>
-            <a href="#">Giới thiệu</a>
-            <a href="#">Liên hệ</a>
-        </nav>
+        <div class="logo-area">
+            <i class="fa-solid fa-gamepad" style="color: #c084fc;"></i>
+            <span>Baoh4cksupport Hub</span>
+        </div>
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Tìm kiếm script, game, tool...">
+        </div>
+        <div class="header-right">
+            <button class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+            <button class="admin-btn"><i class="fa-solid fa-lock"></i> Admin Login</button>
+        </div>
     </header>
 
-    <section class="hero">
-        <h1>Nâng Tầm Trải Nghiệm Website Của Bạn</h1>
-        <p>Trang web này đã được phối lại với tông màu tím chủ đạo huyền ảo, tối ưu tốc độ và hiển thị mượt mà trên mọi thiết bị.</p>
-        <a href="#" class="btn">Khám phá ngay</a>
-    </section>
+    <!-- Categories Filters -->
+    <div class="filters">
+        <button class="filter-btn active">Tất cả</button>
+        <button class="filter-btn"><i class="fa-solid fa-gamepad"></i> Roblox</button>
+        <button class="filter-btn"><i class="fa-solid fa-screwdriver-wrench"></i> Tool</button>
+        <button class="filter-btn"><i class="fa-solid fa-folder"></i> File</button>
+    </div>
 
-    <section class="features">
+    <!-- Cards Container -->
+    <div class="container">
+        <!-- Card 1 -->
         <div class="card">
-            <i class="fa-solid fa-bolt"></i>
-            <h3>Tốc độ cực nhanh</h3>
-            <p>Được tối ưu hóa mã nguồn giúp tải trang trong tích tắc, mang lại trải nghiệm tuyệt vời cho người xem.</p>
+            <div>
+                <span class="badge">ROBLOX - BLOX FRUITS</span>
+                <div class="card-title">Evomon Script</div>
+                <div class="code-box">loadstring(game:HttpGet("https://raw.githubusercontent.com/..."))()</div>
+            </div>
+            <div>
+                <div class="card-footer">
+                    <span><i class="fa-regular fa-eye"></i> 1 lượt xem</span>
+                    <span>Script Code</span>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-view">Xem Code</button>
+                    <button class="btn-copy" onclick="navigator.clipboard.writeText('loadstring(game:HttpGet(\"https://raw.githubusercontent.com/...\"))()')">Copy (1)</button>
+                </div>
+            </div>
         </div>
-        <div class="card">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h3>Bảo mật tối ưu</h3>
-            <p>Sử dụng chứng chỉ SSL an toàn tuyệt đối, bảo vệ thông tin người dùng hiệu quả.</p>
-        </div>
-        <div class="card">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <h3>Giao diện hiện đại</h3>
-            <p>Phong cách thiết kế Dark Mode màu tím huyền bí, sang trọng và bắt mắt.</p>
-        </div>
-    </section>
 
-    <footer>
-        <p>&copy; 2026 Baoh4cksupport. Được lưu trữ trên GitHub Pages.</p>
-    </footer>
+        <!-- Card 2 -->
+        <div class="card">
+            <div>
+                <span class="badge">ROBLOX - BLOX FRUITS</span>
+                <div class="card-title">Redz Hub Auto Farm</div>
+                <div class="code-box">loadstring(game:HttpGet("https://raw.githubusercontent.com/redz99/..."))()</div>
+            </div>
+            <div>
+                <div class="card-footer">
+                    <span><i class="fa-regular fa-eye"></i> 15 lượt xem</span>
+                    <span>Script Code</span>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-view">Xem Code</button>
+                    <button class="btn-copy" onclick="navigator.clipboard.writeText('loadstring(game:HttpGet(\"https://raw.githubusercontent.com/redz99/...\"))()')">Copy (5)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <div>
+                <span class="badge">TOOL - PHẦN MỀM</span>
+                <div class="card-title">Anti-Ban Support Tool</div>
+                <div class="code-box">https://github.com/baoh4cksupport/tool-download-link</div>
+            </div>
+            <div>
+                <div class="card-footer">
+                    <span><i class="fa-regular fa-eye"></i> 32 lượt xem</span>
+                    <span>Download File</span>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-view">Chi tiết</button>
+                    <button class="btn-copy">Tải về</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
