@@ -1,1237 +1,580 @@
 <!DOCTYPE html>
-
 <html lang="vi">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Baoiuhvy168 - Elite Command Center</title>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 
-
-
         * {
-
             margin: 0;
-
             padding: 0;
-
             box-sizing: border-box;
-
             font-family: 'Plus Jakarta Sans', sans-serif;
-
         }
-
-
 
         body {
-
             background-color: #030305;
-
             color: #e2e8f0;
-
             min-height: 100vh;
-
             display: flex;
-
             overflow-x: hidden;
-
             background-image: 
-
                 radial-gradient(circle at 80% 10%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
-
                 radial-gradient(circle at 20% 90%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
-
         }
-
-
 
         sidebar {
-
             width: 280px;
-
             background: rgba(10, 10, 18, 0.85);
-
             backdrop-filter: blur(20px);
-
             border-right: 1px solid rgba(255, 255, 255, 0.05);
-
             display: flex;
-
             flex-direction: column;
-
             justify-content: space-between;
-
             padding: 35px 25px;
-
             position: fixed;
-
             height: 100vh;
-
             z-index: 100;
-
         }
-
-
 
         .brand-box {
-
             display: flex;
-
             align-items: center;
-
             gap: 14px;
-
             font-family: 'Orbitron', sans-serif;
-
             font-size: 20px;
-
             font-weight: 900;
-
             background: linear-gradient(135deg, #a855f7, #38bdf8, #ec4899);
-
             -webkit-background-clip: text;
-
             -webkit-text-fill-color: transparent;
-
             margin-bottom: 40px;
-
         }
-
-
 
         .nav-menu {
-
             display: flex;
-
             flex-direction: column;
-
             gap: 10px;
-
             flex-grow: 1;
-
+            overflow-y: auto;
         }
 
-
+        .nav-menu::-webkit-scrollbar {
+            width: 4px;
+        }
+        .nav-menu::-webkit-scrollbar-thumb {
+            background: rgba(168, 85, 247, 0.3);
+            border-radius: 4px;
+        }
 
         .nav-item {
-
             background: transparent;
-
             border: none;
-
             color: #94a3b8;
-
             padding: 14px 18px;
-
             border-radius: 14px;
-
             font-weight: 600;
-
             text-align: left;
-
             cursor: pointer;
-
             display: flex;
-
             align-items: center;
-
             gap: 12px;
-
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-
         }
-
-
 
         .nav-item:hover, .nav-item.active {
-
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(56, 189, 248, 0.1));
-
             color: #fff;
-
             border-left: 4px solid #a855f7;
-
             transform: translateX(4px);
-
         }
-
-
 
         .admin-trigger {
-
             background: linear-gradient(135deg, #7c3aed, #4f46e5);
-
             color: white;
-
             border: none;
-
             padding: 14px;
-
             border-radius: 14px;
-
             font-weight: 600;
-
             cursor: pointer;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             gap: 10px;
-
             transition: 0.3s;
-
             box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
-
         }
-
-
 
         .admin-trigger:hover {
-
             transform: translateY(-2px);
-
             box-shadow: 0 6px 25px rgba(124, 58, 237, 0.6);
-
         }
-
-
 
         main {
-
             margin-left: 280px;
-
             flex-grow: 1;
-
             padding: 40px 50px;
-
             max-width: calc(100vw - 280px);
-
         }
-
-
 
         .top-bar {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             margin-bottom: 40px;
-
             gap: 20px;
-
         }
-
-
 
         .search-container {
-
             position: relative;
-
             width: 450px;
-
         }
-
-
 
         .search-container input {
-
             width: 100%;
-
             padding: 14px 20px 14px 48px;
-
             background: rgba(255, 255, 255, 0.03);
-
             border: 1px solid rgba(255, 255, 255, 0.08);
-
             border-radius: 16px;
-
             color: #fff;
-
             outline: none;
-
             transition: 0.3s;
-
         }
-
-
 
         .search-container input:focus {
-
             border-color: #a855f7;
-
             background: rgba(10, 10, 18, 0.8);
-
             box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
-
         }
-
-
 
         .search-container i {
-
             position: absolute;
-
             left: 18px;
-
             top: 50%;
-
             transform: translateY(-50%);
-
             color: #a855f7;
-
         }
-
-
 
         .user-love-badge {
-
             background: rgba(236, 72, 153, 0.1);
-
             border: 1px solid rgba(236, 72, 153, 0.3);
-
             padding: 10px 20px;
-
             border-radius: 30px;
-
             font-size: 13px;
-
             font-weight: 600;
-
             color: #f472b6;
-
             display: flex;
-
             align-items: center;
-
             gap: 8px;
-
             backdrop-filter: blur(10px);
-
         }
-
-
 
         .grid-container {
-
             display: grid;
-
             grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-
             gap: 25px;
-
         }
-
-
 
         .script-card {
-
             background: rgba(15, 15, 25, 0.6);
-
             backdrop-filter: blur(20px);
-
             border: 1px solid rgba(255, 255, 255, 0.05);
-
             border-radius: 20px;
-
             padding: 25px;
-
             position: relative;
-
             display: flex;
-
             flex-direction: column;
-
             justify-content: space-between;
-
             animation: slideUp 0.5s ease-out forwards;
-
         }
-
-
 
         @keyframes slideUp {
-
             from { opacity: 0; transform: translateY(30px); }
-
             to { opacity: 1; transform: translateY(0); }
-
         }
-
-
 
         .script-card:hover {
-
             border-color: rgba(168, 85, 247, 0.4);
-
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.15);
-
         }
-
-
 
         .card-tag {
-
             display: inline-block;
-
             background: rgba(168, 85, 247, 0.1);
-
             color: #d8b4fe;
-
             font-size: 11px;
-
             font-weight: 700;
-
             padding: 6px 14px;
-
             border-radius: 8px;
-
             margin-bottom: 15px;
-
             border: 1px solid rgba(168, 85, 247, 0.2);
-
             letter-spacing: 0.5px;
-
         }
-
-
 
         .card-heading {
-
             font-family: 'Orbitron', sans-serif;
-
             font-size: 17px;
-
             font-weight: 700;
-
             margin-bottom: 15px;
-
             color: #fff;
-
         }
-
-
 
         .terminal-box {
-
             background: #050508;
-
             border: 1px solid rgba(255, 255, 255, 0.03);
-
             padding: 14px;
-
             border-radius: 12px;
-
             font-family: monospace;
-
             font-size: 13px;
-
             color: #38bdf8;
-
             white-space: nowrap;
-
             overflow-x: auto;
-
             margin-bottom: 20px;
-
         }
-
-
 
         .terminal-box::-webkit-scrollbar { height: 3px; }
-
         .terminal-box::-webkit-scrollbar-thumb { background: #7c3aed; }
 
-
-
         .card-bottom {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             border-top: 1px solid rgba(255, 255, 255, 0.04);
-
             padding-top: 15px;
-
             font-size: 12px;
-
             color: #64748b;
-
             margin-bottom: 15px;
-
         }
-
-
-
-        /* Tối ưu hóa vùng chứa nút bấm để bấm nhạy 100% */
 
         .card-actions-row {
-
             display: flex;
-
             gap: 10px;
-
             position: relative;
-
             z-index: 10;
-
         }
-
-
 
         .btn-action-copy {
-
             flex: 1;
-
             background: linear-gradient(135deg, #0284c7, #0369a1);
-
             color: white;
-
             border: none;
-
             padding: 12px;
-
             border-radius: 12px;
-
             font-weight: 600;
-
             cursor: pointer;
-
             transition: 0.3s;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             gap: 8px;
-
             box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
-
         }
-
-
 
         .btn-action-copy:hover {
-
             background: linear-gradient(135deg, #0369a1, #075985);
-
             transform: scale(1.02);
-
         }
-
-
 
         .btn-action-delete {
-
             background: rgba(239, 68, 68, 0.15);
-
             color: #f87171;
-
             border: 1px solid rgba(239, 68, 68, 0.3);
-
             padding: 0 18px;
-
             border-radius: 12px;
-
             cursor: pointer;
-
             font-weight: 600;
-
             transition: 0.3s;
-
             display: none; 
-
             align-items: center;
-
             justify-content: center;
-
             gap: 6px;
-
         }
-
-
 
         .btn-action-delete:hover {
-
             background: rgba(239, 68, 68, 0.4);
-
             color: #fff;
-
         }
-
-
 
         .modal-backdrop {
-
             display: none;
-
             position: fixed;
-
             top: 0; left: 0; width: 100%; height: 100%;
-
             background: rgba(3, 3, 5, 0.85);
-
             backdrop-filter: blur(15px);
-
             justify-content: center;
-
             align-items: center;
-
             z-index: 1000;
-
         }
-
-
 
         .modal-box {
-
             background: #0f0f19;
-
             border: 1px solid rgba(168, 85, 247, 0.4);
-
             padding: 35px;
-
             border-radius: 24px;
-
             width: 450px;
-
             max-width: 90%;
-
             box-shadow: 0 25px 60px rgba(0,0,0,0.9);
-
         }
-
-
 
         .modal-box h3 {
-
             font-family: 'Orbitron', sans-serif;
-
             color: #a855f7;
-
             margin-bottom: 20px;
-
             font-size: 18px;
-
         }
-
-
 
         .modal-box input, .modal-box select, .modal-box textarea {
-
             width: 100%;
-
             padding: 14px;
-
             margin-bottom: 15px;
-
             background: #030305;
-
             border: 1px solid rgba(255, 255, 255, 0.08);
-
             color: #fff;
-
             border-radius: 12px;
-
             outline: none;
-
         }
-
-
 
         .modal-box input:focus, .modal-box textarea:focus {
-
             border-color: #a855f7;
-
         }
-
-
 
         .modal-btns {
-
             display: flex;
-
             gap: 12px;
-
         }
-
-
 
         .modal-btns button {
-
             flex: 1;
-
             padding: 12px;
-
             border-radius: 12px;
-
             border: none;
-
             font-weight: 600;
-
             cursor: pointer;
-
             transition: 0.3s;
-
         }
-
-
 
         .btn-confirm { background: #10b981; color: white; }
-
         .btn-confirm:hover { background: #059669; }
-
         .btn-cancel { background: #ef4444; color: white; }
-
         .btn-cancel:hover { background: #dc2626; }
-
     </style>
-
 </head>
-
 <body>
 
-
-
     <sidebar>
-
         <div>
-
             <div class="brand-box">
-
                 <i class="fa-solid fa-atom"></i>
-
                 <span>BAOIUHVY HUB</span>
-
             </div>
-
-            <div class="nav-menu">
-
-                <button class="nav-item active" onclick="playClickSound(); filterCategory('Tất cả', this)">
-
-                    <i class="fa-solid fa-globe"></i> Tất cả Script
-
-                </button>
-
-                <button class="nav-item" onclick="playClickSound(); filterCategory('ROBLOX', this)">
-
-                    <i class="fa-solid fa-gamepad"></i> Roblox
-
-                </button>
-
-                <button class="nav-item" onclick="playClickSound(); filterCategory('EXECUTOR', this)">
-
-                    <i class="fa-solid fa-code"></i> Executor
-
-                </button>
-
-            </div>
-
+            <!-- Danh mục sẽ được render động qua JavaScript -->
+            <div class="nav-menu"></div>
         </div>
-
         <button class="admin-trigger" onclick="playClickSound(); checkAdmin();">
-
             <i class="fa-solid fa-fingerprint"></i> Admin Portal
-
         </button>
-
     </sidebar>
 
-
-
     <main>
-
         <div class="top-bar">
-
             <div class="search-container">
-
                 <i class="fa-solid fa-magnifying-glass"></i>
-
                 <input type="text" id="searchInput" placeholder="Tìm kiếm mã lệnh nhanh chóng..." onkeyup="searchScripts()">
-
             </div>
-
             <div class="user-love-badge">
-
                 <i class="fa-solid fa-heart" style="color: #ec4899;"></i> Dedicated to Vy (168)
-
             </div>
-
         </div>
-
-
 
         <div class="grid-container" id="scriptContainer"></div>
-
     </main>
 
-
-
     <div class="modal-backdrop" id="adminModal">
-
         <div class="modal-box">
-
-            <h3>ĐĂNG TẢI SCRIPT MỚI</h3>
-
-            <input type="text" id="scriptTitle" placeholder="Tiêu đề Script (VD: Script VIP)">
-
-            <select id="scriptCategory">
-
-                <option value="ROBLOX">ROBLOX</option>
-
-                <option value="EXECUTOR">EXECUTOR</option>
-
-            </select>
-
-            <textarea id="scriptCode" placeholder="Dán mã Loadstring..." rows="3"></textarea>
-
+            <h3>ĐĂNG TẢI NỘI DUNG MỚI</h3>
+            <input type="text" id="scriptTitle" placeholder="Tiêu đề (VD: Script VIP)">
+            <!-- Cho phép Admin tự nhập danh mục tùy ý -->
+            <input type="text" id="scriptCategory" placeholder="Nhập danh mục tùy chỉnh (VD: TÀI LIỆU, CÔNG CỤ...)">
+            <textarea id="scriptCode" placeholder="Dán nội dung hoặc mã lệnh..." rows="3"></textarea>
             <div class="modal-btns">
-
                 <button class="btn-confirm" onclick="playClickSound(); addNewScript()">Xác Nhận</button>
-
                 <button class="btn-cancel" onclick="playClickSound(); closeModal()">Đóng</button>
-
             </div>
-
         </div>
-
     </div>
 
-
-const ADMIN_PASSWORD = "baoiuhvy168";
-
-// 1. Kiểm tra trạng thái đăng nhập từ trước trong phiên làm việc
-let isAdminLoggedIn = sessionStorage.getItem('isAdmin') === 'true';
-
-function playClickSound() {
-    try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.05);
-        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
-        osc.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.05);
-    } catch(e) {}
-}
-
-let scripts = JSON.parse(localStorage.getItem('elite_scripts_v4')) || [
-    { title: "Evomon Ultimate Hub", category: "ROBLOX", code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/zenike/..."))()' }
-];
-
-// Danh sách danh mục lưu trong localStorage
-let categories = JSON.parse(localStorage.getItem('elite_categories')) || ['Tất cả', 'ROBLOX', 'EXECUTOR'];
-
-// Hàm render các nút danh mục động ở sidebar
-function renderCategories() {
-    const navMenu = document.querySelector('.nav-menu');
-    navMenu.innerHTML = '';
-    categories.forEach(cat => {
-        let btn = document.createElement('button');
-        btn.className = `nav-item ${cat === 'Tất cả' ? 'active' : ''}`;
-        btn.innerHTML = `<i class="fa-solid fa-folder"></i> ${cat}`;
-        btn.onclick = () => { playClickSound(); filterCategory(cat, btn); };
-        navMenu.appendChild(btn);
-    });
-}
-
-function renderScripts(data = scripts) {
-    const container = document.getElementById('scriptContainer');
-    container.innerHTML = "";
-    data.forEach((item, index) => {
-        let deleteBtnStyle = isAdminLoggedIn ? "display: flex;" : "display: none;";
-        
-        const card = document.createElement('div');
-        card.className = 'script-card';
-        
-        card.innerHTML = `
-            <div>
-                <span class="card-tag">${item.category}</span>
-                <div class="card-heading">${item.title}</div>
-                <div class="terminal-box">${item.code}</div>
-            </div>
-            <div>
-                <div class="card-bottom">
-                    <span><i class="fa-solid fa-shield-cat"></i> Secure Verified</span>
-                    <span style="color: #10b981; font-weight: 600;">Online</span>
-                </div>
-                <div class="card-actions-row">
-                    <button type="button" class="btn-action-copy" data-code="${item.code.replace(/"/g, '&quot;')}">
-                        <i class="fa-regular fa-clone"></i> Sao Chép Mã
-                    </button>
-                    <button type="button" class="btn-action-delete" style="${deleteBtnStyle}" onclick="playClickSound(); deleteScript(${index})">
-                        <i class="fa-solid fa-trash"></i> Xóa
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        const copyBtn = card.querySelector('.btn-action-copy');
-        copyBtn.addEventListener('click', function() {
-            playClickSound();
-            const codeToCopy = this.getAttribute('data-code');
-            copyCode(codeToCopy, this);
-        });
-
-        container.appendChild(card);
-    });
-}
-
-function checkAdmin() {
-    // Nếu đã đăng nhập trước đó thì mở thẳng bảng quản trị không cần hỏi mật khẩu
-    if (isAdminLoggedIn) {
-        document.getElementById('adminModal').style.display = 'flex';
-        return;
-    }
-
-    let pass = prompt("Nhập mật khẩu quản trị hệ thống:");
-    if (pass === ADMIN_PASSWORD) {
-        isAdminLoggedIn = true;
-        sessionStorage.setItem('isAdmin', 'true'); // Lưu trạng thái đăng nhập
-        renderScripts();
-        document.getElementById('adminModal').style.display = 'flex';
-    } else if (pass !== null) {
-        alert("Mật khẩu không chính xác!");
-    }
-}
-
-function closeModal() {
-    document.getElementById('adminModal').style.display = 'none';
-}
-
-function addNewScript() {
-    let title = document.getElementById('scriptTitle').value;
-    let category = document.getElementById('scriptCategory').value.trim().toUpperCase();
-    let code = document.getElementById('scriptCode').value;
-
-    if(!title || !category || !code) {
-        alert("Vui lòng điền đầy đủ các mục!");
-        return;
-    }
-
-    // Nếu danh mục mới chưa tồn tại trong hệ thống, tự động thêm vào danh sách và cập nhật Sidebar
-    if(!categories.includes(category)) {
-        categories.push(category);
-        localStorage.setItem('elite_categories', JSON.stringify(categories));
-        renderCategories();
-    }
-
-    scripts.unshift({ title, category, code });
-    localStorage.setItem('elite_scripts_v4', JSON.stringify(scripts));
-    renderScripts();
-    closeModal();
-    
-    document.getElementById('scriptTitle').value = '';
-    document.getElementById('scriptCategory').value = '';
-    document.getElementById('scriptCode').value = '';
-}
-
-function deleteScript(index) {
-    if(confirm("Bạn có chắc chắn muốn xóa mục này không?")) {
-        scripts.splice(index, 1);
-        localStorage.setItem('elite_scripts_v4', JSON.stringify(scripts));
-        renderScripts();
-    }
-}
-
-function copyCode(text, btn) {
-    navigator.clipboard.writeText(text).then(() => {
-        let originalHTML = btn.innerHTML;
-        btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Đã sao chép!`;
-        btn.style.background = "linear-gradient(135deg, #059669, #047857)";
-        setTimeout(() => {
-            btn.innerHTML = originalHTML;
-            btn.style.background = "linear-gradient(135deg, #0284c7, #0369a1)";
-        }, 1800);
-    }).catch(err => {
-        alert("Không thể sao chép tự động!");
-    });
-}
-
-function searchScripts() {
-    let keyword = document.getElementById('searchInput').value.toLowerCase();
-    let filtered = scripts.filter(s => s.title.toLowerCase().includes(keyword) || s.category.toLowerCase().includes(keyword));
-    renderScripts(filtered);
-}
-
-function filterCategory(cat, btn) {
-    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    if(cat === 'Tất cả') {
-        renderScripts();
-    } else {
-        let filtered = scripts.filter(s => s.category.toUpperCase() === cat.toUpperCase());
-        renderScripts(filtered);
-    }
-}
-
-// Khởi chạy khi tải trang
-renderCategories();
-renderScripts();
-
-
+    <script>
+        const ADMIN_PASSWORD = "baoiuhvy168";
+        let isAdminLoggedIn = sessionStorage.getItem('isAdmin') === 'true';
 
         function playClickSound() {
-
             try {
-
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
                 const osc = audioCtx.createOscillator();
-
                 const gainNode = audioCtx.createGain();
-
                 osc.type = 'triangle';
-
                 osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-
                 osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.05);
-
                 gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
-
                 osc.connect(gainNode);
-
                 gainNode.connect(audioCtx.destination);
-
                 osc.start();
-
                 osc.stop(audioCtx.currentTime + 0.05);
-
             } catch(e) {}
-
         }
-
-
 
         let scripts = JSON.parse(localStorage.getItem('elite_scripts_v4')) || [
-
             { title: "Evomon Ultimate Hub", category: "ROBLOX", code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/zenike/..."))()' }
-
         ];
 
+        let categories = JSON.parse(localStorage.getItem('elite_categories')) || ['Tất cả', 'ROBLOX', 'EXECUTOR'];
 
+        function renderCategories() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.innerHTML = '';
+            categories.forEach(cat => {
+                let btn = document.createElement('button');
+                btn.className = `nav-item ${cat === 'Tất cả' ? 'active' : ''}`;
+                btn.innerHTML = `<i class="fa-solid fa-folder"></i> ${cat}`;
+                btn.onclick = () => { playClickSound(); filterCategory(cat, btn); };
+                navMenu.appendChild(btn);
+            });
+        }
 
         function renderScripts(data = scripts) {
-    const container = document.getElementById('scriptContainer');
-    container.innerHTML = "";
-    data.forEach((item, index) => {
-        let deleteBtnStyle = isAdminLoggedIn ? "display: flex;" : "display: none;";
-        
-        // Tạo thẻ div bọc card
-        const card = document.createElement('div');
-        card.className = 'script-card';
-        
-        card.innerHTML = `
-            <div>
-                <span class="card-tag">${item.category}</span>
-                <div class="card-heading">${item.title}</div>
-                <div class="terminal-box">${item.code}</div>
-            </div>
-            <div>
-                <div class="card-bottom">
-                    <span><i class="fa-solid fa-shield-cat"></i> Secure Verified</span>
-                    <span style="color: #10b981; font-weight: 600;">Online</span>
-                </div>
-                <div class="card-actions-row">
-                    <button type="button" class="btn-action-copy" data-code="${item.code.replace(/"/g, '&quot;')}">
-                        <i class="fa-regular fa-clone"></i> Sao Chép Mã
-                    </button>
-                    <button type="button" class="btn-action-delete" style="${deleteBtnStyle}" onclick="playClickSound(); deleteScript(${index})">
-                        <i class="fa-solid fa-trash"></i> Xóa
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        // Gắn sự kiện click bằng addEventListener cho nút copy để tránh lỗi ký tự đặc biệt
-        const copyBtn = card.querySelector('.btn-action-copy');
-        copyBtn.addEventListener('click', function() {
-            playClickSound();
-            const codeToCopy = this.getAttribute('data-code');
-            copyCode(codeToCopy, this);
-        });
+            const container = document.getElementById('scriptContainer');
+            container.innerHTML = "";
+            data.forEach((item, index) => {
+                let deleteBtnStyle = isAdminLoggedIn ? "display: flex;" : "display: none;";
+                
+                const card = document.createElement('div');
+                card.className = 'script-card';
+                
+                card.innerHTML = `
+                    <div>
+                        <span class="card-tag">${item.category}</span>
+                        <div class="card-heading">${item.title}</div>
+                        <div class="terminal-box">${item.code}</div>
+                    </div>
+                    <div>
+                        <div class="card-bottom">
+                            <span><i class="fa-solid fa-shield-cat"></i> Secure Verified</span>
+                            <span style="color: #10b981; font-weight: 600;">Online</span>
+                        </div>
+                        <div class="card-actions-row">
+                            <button type="button" class="btn-action-copy" data-code="${item.code.replace(/"/g, '&quot;')}">
+                                <i class="fa-regular fa-clone"></i> Sao Chép Mã
+                            </button>
+                            <button type="button" class="btn-action-delete" style="${deleteBtnStyle}" onclick="playClickSound(); deleteScript(${index})">
+                                <i class="fa-solid fa-trash"></i> Xóa
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                const copyBtn = card.querySelector('.btn-action-copy');
+                copyBtn.addEventListener('click', function() {
+                    playClickSound();
+                    const codeToCopy = this.getAttribute('data-code');
+                    copyCode(codeToCopy, this);
+                });
 
-        container.appendChild(card);
-    });
-}
-
+                container.appendChild(card);
+            });
+        }
 
         function checkAdmin() {
+            if (isAdminLoggedIn) {
+                document.getElementById('adminModal').style.display = 'flex';
+                return;
+            }
 
             let pass = prompt("Nhập mật khẩu quản trị hệ thống:");
-
             if (pass === ADMIN_PASSWORD) {
-
                 isAdminLoggedIn = true;
-
+                sessionStorage.setItem('isAdmin', 'true');
                 renderScripts();
-
                 document.getElementById('adminModal').style.display = 'flex';
-
             } else if (pass !== null) {
-
                 alert("Mật khẩu không chính xác!");
-
             }
-
         }
-
-
 
         function closeModal() {
-
             document.getElementById('adminModal').style.display = 'none';
-
         }
-
-
 
         function addNewScript() {
+            let title = document.getElementById('scriptTitle').value.trim();
+            let category = document.getElementById('scriptCategory').value.trim().toUpperCase();
+            let code = document.getElementById('scriptCode').value.trim();
 
-            let title = document.getElementById('scriptTitle').value;
-
-            let category = document.getElementById('scriptCategory').value;
-
-            let code = document.getElementById('scriptCode').value;
-
-
-
-            if(!title || !code) {
-
+            if(!title || !category || !code) {
                 alert("Vui lòng điền đầy đủ các mục!");
-
                 return;
-
             }
 
-
+            if(!categories.includes(category)) {
+                categories.push(category);
+                localStorage.setItem('elite_categories', JSON.stringify(categories));
+                renderCategories();
+            }
 
             scripts.unshift({ title, category, code });
-
             localStorage.setItem('elite_scripts_v4', JSON.stringify(scripts));
-
             renderScripts();
-
             closeModal();
-
             
-
             document.getElementById('scriptTitle').value = '';
-
+            document.getElementById('scriptCategory').value = '';
             document.getElementById('scriptCode').value = '';
-
         }
-
-
 
         function deleteScript(index) {
-
-            if(confirm("Bạn có chắc chắn muốn xóa script này không?")) {
-
+            if(confirm("Bạn có chắc chắn muốn xóa mục này không?")) {
                 scripts.splice(index, 1);
-
                 localStorage.setItem('elite_scripts_v4', JSON.stringify(scripts));
-
                 renderScripts();
-
             }
-
         }
-
-
 
         function copyCode(text, btn) {
-
             navigator.clipboard.writeText(text).then(() => {
-
                 let originalHTML = btn.innerHTML;
-
                 btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Đã sao chép!`;
-
                 btn.style.background = "linear-gradient(135deg, #059669, #047857)";
-
                 setTimeout(() => {
-
                     btn.innerHTML = originalHTML;
-
                     btn.style.background = "linear-gradient(135deg, #0284c7, #0369a1)";
-
                 }, 1800);
-
             }).catch(err => {
-
-                alert("Không thể sao chép tự động, vui lòng copy thủ công!");
-
+                alert("Không thể sao chép tự động!");
             });
-
         }
-
-
 
         function searchScripts() {
-
             let keyword = document.getElementById('searchInput').value.toLowerCase();
-
             let filtered = scripts.filter(s => s.title.toLowerCase().includes(keyword) || s.category.toLowerCase().includes(keyword));
-
             renderScripts(filtered);
-
         }
-
-
 
         function filterCategory(cat, btn) {
-
             document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-
             btn.classList.add('active');
-
             if(cat === 'Tất cả') {
-
                 renderScripts();
-
             } else {
-
                 let filtered = scripts.filter(s => s.category.toUpperCase() === cat.toUpperCase());
-
                 renderScripts(filtered);
-
             }
-
         }
 
-
-
+        // Khởi chạy hệ thống
+        renderCategories();
         renderScripts();
-
     </script>
-
 </body>
-
 </html>
