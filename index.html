@@ -26,7 +26,7 @@
                 radial-gradient(circle at 20% 90%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
         }
 
-        sidebar {
+        .sidebar {
             width: 280px;
             background: rgba(10, 10, 18, 0.85);
             backdrop-filter: blur(20px);
@@ -316,6 +316,8 @@
             width: 450px;
             max-width: 90%;
             box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+            position: relative;
+            z-index: 1001;
         }
 
         .modal-box h3 {
@@ -363,7 +365,8 @@
 </head>
 <body>
 
-    <sidebar>
+    <!-- Đã sửa lại đúng tên class .sidebar thay vì thẻ sidebar -->
+    <div class="sidebar">
         <div>
             <div class="brand-box">
                 <i class="fa-solid fa-atom"></i>
@@ -374,7 +377,7 @@
         <button class="admin-trigger" onclick="playClickSound(); checkAdmin();">
             <i class="fa-solid fa-fingerprint"></i> Admin Portal
         </button>
-    </sidebar>
+    </div>
 
     <main>
         <div class="top-bar">
@@ -424,7 +427,8 @@
         try { getAnalytics(app); } catch(e) {}
 
         const ADMIN_PASSWORD = "baoiuhvy168";
-        let isAdminLoggedIn = sessionStorage.getItem('isAdmin') === 'true';
+        // Dùng localStorage để lưu vĩnh viễn trạng thái Admin, không cần nhập lại mật khẩu lần sau
+        let isAdminLoggedIn = localStorage.getItem('isAdmin') === 'true';
 
         window.playClickSound = function() {
             try {
@@ -530,7 +534,7 @@
             let pass = prompt("Nhập mật khẩu quản trị hệ thống:");
             if (pass === ADMIN_PASSWORD) {
                 isAdminLoggedIn = true;
-                sessionStorage.setItem('isAdmin', 'true');
+                localStorage.setItem('isAdmin', 'true'); // Lưu vĩnh viễn trên máy
                 renderScripts();
                 document.getElementById('adminModal').style.display = 'flex';
             } else if (pass !== null) {
