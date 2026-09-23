@@ -369,7 +369,6 @@
                 <i class="fa-solid fa-atom"></i>
                 <span>BAOIUHVY HUB</span>
             </div>
-            <!-- Danh mục sẽ được render động qua JavaScript -->
             <div class="nav-menu"></div>
         </div>
         <button class="admin-trigger" onclick="playClickSound(); checkAdmin();">
@@ -394,8 +393,7 @@
     <div class="modal-backdrop" id="adminModal">
         <div class="modal-box">
             <h3>ĐĂNG TẢI NỘI DUNG MỚI</h3>
-            <input type="text" id="scriptTitle" placeholder="Tiêu đề (VD: Script VIP)">
-            <!-- Cho phép Admin tự nhập danh mục tùy ý -->
+            <input type="text" id="scriptTitle" placeholder="Tiêu đề (VD: Tài liệu VIP)">
             <input type="text" id="scriptCategory" placeholder="Nhập danh mục tùy chỉnh (VD: TÀI LIỆU, CÔNG CỤ...)">
             <textarea id="scriptCode" placeholder="Dán nội dung hoặc mã lệnh..." rows="3"></textarea>
             <div class="modal-btns">
@@ -405,11 +403,30 @@
         </div>
     </div>
 
-    <script>
+    <!-- Tích hợp Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDa1aEDYKSCYnvJdllpNeIg_qHxx8V129E",
+            authDomain: "hack-82c4a.firebaseapp.com",
+            projectId: "hack-82c4a",
+            storageBucket: "hack-82c4a.firebasestorage.app",
+            messagingSenderId: "605533220611",
+            appId: "1:605533220611:web:82518a755e1c3ea061c336",
+            measurementId: "G-C30BRCX86S"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        try { getAnalytics(app); } catch(e) {}
+
         const ADMIN_PASSWORD = "baoiuhvy168";
         let isAdminLoggedIn = sessionStorage.getItem('isAdmin') === 'true';
 
-        function playClickSound() {
+        window.playClickSound = function() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = audioCtx.createOscillator();
@@ -426,13 +443,31 @@
             } catch(e) {}
         }
 
-        let scripts = JSON.parse(localStorage.getItem('elite_scripts_v4')) || [
-            { title: "Evomon Ultimate Hub", category: "ROBLOX", code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/zenike/..."))()' }
-        ];
+        let scripts = [];
+        let categories = ['Tất cả', 'TÀI LIỆU', 'CÔNG CỤ'];
 
-        let categories = JSON.parse(localStorage.getItem('elite_categories')) || ['Tất cả', 'ROBLOX', 'EXECUTOR'];
+        async function loadScriptsFromFirebase() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "scripts"));
+                scripts = [];
+                categories = ['Tất cả'];
+                
+                querySnapshot.forEach((docSnap) => {
+                    let data = docSnap.data();
+                    scripts.push({ id: docSnap.id, ...data });
+                    if(data.category && !categories.includes(data.category)) {
+                        categories.push(data.category);
+                    }
+                });
+                
+                renderCategories();
+                renderScripts();
+            } catch (e) {
+                console.error("Lỗi tải dữ liệu Firebase: ", e);
+            }
+        }
 
-        function renderCategories() {
+        window.renderCategories = function() {
             const navMenu = document.querySelector('.nav-menu');
             navMenu.innerHTML = '';
             categories.forEach(cat => {
@@ -444,10 +479,10 @@
             });
         }
 
-        function renderScripts(data = scripts) {
+        window.renderScripts = function(data = scripts) {
             const container = document.getElementById('scriptContainer');
             container.innerHTML = "";
-            data.forEach((item, index) => {
+            data.forEach((item) => {
                 let deleteBtnStyle = isAdminLoggedIn ? "display: flex;" : "display: none;";
                 
                 const card = document.createElement('div');
@@ -468,7 +503,7 @@
                             <button type="button" class="btn-action-copy" data-code="${item.code.replace(/"/g, '&quot;')}">
                                 <i class="fa-regular fa-clone"></i> Sao Chép Mã
                             </button>
-                            <button type="button" class="btn-action-delete" style="${deleteBtnStyle}" onclick="playClickSound(); deleteScript(${index})">
+                            <button type="button" class="btn-action-delete" style="${deleteBtnStyle}" onclick="playClickSound(); deleteScript('${item.id}')">
                                 <i class="fa-solid fa-trash"></i> Xóa
                             </button>
                         </div>
@@ -486,7 +521,7 @@
             });
         }
 
-        function checkAdmin() {
+        window.checkAdmin = function() {
             if (isAdminLoggedIn) {
                 document.getElementById('adminModal').style.display = 'flex';
                 return;
@@ -503,11 +538,11 @@
             }
         }
 
-        function closeModal() {
+        window.closeModal = function() {
             document.getElementById('adminModal').style.display = 'none';
         }
 
-        function addNewScript() {
+        window.addNewScript = async function() {
             let title = document.getElementById('scriptTitle').value.trim();
             let category = document.getElementById('scriptCategory').value.trim().toUpperCase();
             let code = document.getElementById('scriptCode').value.trim();
@@ -517,31 +552,31 @@
                 return;
             }
 
-            if(!categories.includes(category)) {
-                categories.push(category);
-                localStorage.setItem('elite_categories', JSON.stringify(categories));
-                renderCategories();
+            try {
+                await addDoc(collection(db, "scripts"), { title, category, code });
+                await loadScriptsFromFirebase();
+                closeModal();
+                
+                document.getElementById('scriptTitle').value = '';
+                document.getElementById('scriptCategory').value = '';
+                document.getElementById('scriptCode').value = '';
+            } catch (e) {
+                alert("Lỗi khi thêm dữ liệu lên Firebase!");
             }
-
-            scripts.unshift({ title, category, code });
-            localStorage.setItem('elite_scripts_v4', JSON.stringify(scripts));
-            renderScripts();
-            closeModal();
-            
-            document.getElementById('scriptTitle').value = '';
-            document.getElementById('scriptCategory').value = '';
-            document.getElementById('scriptCode').value = '';
         }
 
-        function deleteScript(index) {
+        window.deleteScript = async function(id) {
             if(confirm("Bạn có chắc chắn muốn xóa mục này không?")) {
-                scripts.splice(index, 1);
-                localStorage.setItem('elite_scripts_v4', JSON.stringify(scripts));
-                renderScripts();
+                try {
+                    await deleteDoc(doc(db, "scripts", id));
+                    await loadScriptsFromFirebase();
+                } catch (e) {
+                    alert("Lỗi khi xóa dữ liệu!");
+                }
             }
         }
 
-        function copyCode(text, btn) {
+        window.copyCode = function(text, btn) {
             navigator.clipboard.writeText(text).then(() => {
                 let originalHTML = btn.innerHTML;
                 btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Đã sao chép!`;
@@ -555,13 +590,13 @@
             });
         }
 
-        function searchScripts() {
+        window.searchScripts = function() {
             let keyword = document.getElementById('searchInput').value.toLowerCase();
             let filtered = scripts.filter(s => s.title.toLowerCase().includes(keyword) || s.category.toLowerCase().includes(keyword));
             renderScripts(filtered);
         }
 
-        function filterCategory(cat, btn) {
+        window.filterCategory = function(cat, btn) {
             document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             if(cat === 'Tất cả') {
@@ -572,9 +607,7 @@
             }
         }
 
-        // Khởi chạy hệ thống
-        renderCategories();
-        renderScripts();
+        loadScriptsFromFirebase();
     </script>
 </body>
 </html>
