@@ -817,12 +817,181 @@
     </div>
 
 
+const ADMIN_PASSWORD = "baoiuhvy168";
 
-    <script>
+// 1. Kiểm tra trạng thái đăng nhập từ trước trong phiên làm việc
+let isAdminLoggedIn = sessionStorage.getItem('isAdmin') === 'true';
 
-        const ADMIN_PASSWORD = "baoiuhvy168";
+function playClickSound() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.05);
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.05);
+    } catch(e) {}
+}
 
-        let isAdminLoggedIn = false;
+let scripts = JSON.parse(localStorage.getItem('elite_scripts_v4')) || [
+    { title: "Evomon Ultimate Hub", category: "ROBLOX", code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/zenike/..."))()' }
+];
+
+// Danh sách danh mục lưu trong localStorage
+let categories = JSON.parse(localStorage.getItem('elite_categories')) || ['Tất cả', 'ROBLOX', 'EXECUTOR'];
+
+// Hàm render các nút danh mục động ở sidebar
+function renderCategories() {
+    const navMenu = document.querySelector('.nav-menu');
+    navMenu.innerHTML = '';
+    categories.forEach(cat => {
+        let btn = document.createElement('button');
+        btn.className = `nav-item ${cat === 'Tất cả' ? 'active' : ''}`;
+        btn.innerHTML = `<i class="fa-solid fa-folder"></i> ${cat}`;
+        btn.onclick = () => { playClickSound(); filterCategory(cat, btn); };
+        navMenu.appendChild(btn);
+    });
+}
+
+function renderScripts(data = scripts) {
+    const container = document.getElementById('scriptContainer');
+    container.innerHTML = "";
+    data.forEach((item, index) => {
+        let deleteBtnStyle = isAdminLoggedIn ? "display: flex;" : "display: none;";
+        
+        const card = document.createElement('div');
+        card.className = 'script-card';
+        
+        card.innerHTML = `
+            <div>
+                <span class="card-tag">${item.category}</span>
+                <div class="card-heading">${item.title}</div>
+                <div class="terminal-box">${item.code}</div>
+            </div>
+            <div>
+                <div class="card-bottom">
+                    <span><i class="fa-solid fa-shield-cat"></i> Secure Verified</span>
+                    <span style="color: #10b981; font-weight: 600;">Online</span>
+                </div>
+                <div class="card-actions-row">
+                    <button type="button" class="btn-action-copy" data-code="${item.code.replace(/"/g, '&quot;')}">
+                        <i class="fa-regular fa-clone"></i> Sao Chép Mã
+                    </button>
+                    <button type="button" class="btn-action-delete" style="${deleteBtnStyle}" onclick="playClickSound(); deleteScript(${index})">
+                        <i class="fa-solid fa-trash"></i> Xóa
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        const copyBtn = card.querySelector('.btn-action-copy');
+        copyBtn.addEventListener('click', function() {
+            playClickSound();
+            const codeToCopy = this.getAttribute('data-code');
+            copyCode(codeToCopy, this);
+        });
+
+        container.appendChild(card);
+    });
+}
+
+function checkAdmin() {
+    // Nếu đã đăng nhập trước đó thì mở thẳng bảng quản trị không cần hỏi mật khẩu
+    if (isAdminLoggedIn) {
+        document.getElementById('adminModal').style.display = 'flex';
+        return;
+    }
+
+    let pass = prompt("Nhập mật khẩu quản trị hệ thống:");
+    if (pass === ADMIN_PASSWORD) {
+        isAdminLoggedIn = true;
+        sessionStorage.setItem('isAdmin', 'true'); // Lưu trạng thái đăng nhập
+        renderScripts();
+        document.getElementById('adminModal').style.display = 'flex';
+    } else if (pass !== null) {
+        alert("Mật khẩu không chính xác!");
+    }
+}
+
+function closeModal() {
+    document.getElementById('adminModal').style.display = 'none';
+}
+
+function addNewScript() {
+    let title = document.getElementById('scriptTitle').value;
+    let category = document.getElementById('scriptCategory').value.trim().toUpperCase();
+    let code = document.getElementById('scriptCode').value;
+
+    if(!title || !category || !code) {
+        alert("Vui lòng điền đầy đủ các mục!");
+        return;
+    }
+
+    // Nếu danh mục mới chưa tồn tại trong hệ thống, tự động thêm vào danh sách và cập nhật Sidebar
+    if(!categories.includes(category)) {
+        categories.push(category);
+        localStorage.setItem('elite_categories', JSON.stringify(categories));
+        renderCategories();
+    }
+
+    scripts.unshift({ title, category, code });
+    localStorage.setItem('elite_scripts_v4', JSON.stringify(scripts));
+    renderScripts();
+    closeModal();
+    
+    document.getElementById('scriptTitle').value = '';
+    document.getElementById('scriptCategory').value = '';
+    document.getElementById('scriptCode').value = '';
+}
+
+function deleteScript(index) {
+    if(confirm("Bạn có chắc chắn muốn xóa mục này không?")) {
+        scripts.splice(index, 1);
+        localStorage.setItem('elite_scripts_v4', JSON.stringify(scripts));
+        renderScripts();
+    }
+}
+
+function copyCode(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+        let originalHTML = btn.innerHTML;
+        btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Đã sao chép!`;
+        btn.style.background = "linear-gradient(135deg, #059669, #047857)";
+        setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.style.background = "linear-gradient(135deg, #0284c7, #0369a1)";
+        }, 1800);
+    }).catch(err => {
+        alert("Không thể sao chép tự động!");
+    });
+}
+
+function searchScripts() {
+    let keyword = document.getElementById('searchInput').value.toLowerCase();
+    let filtered = scripts.filter(s => s.title.toLowerCase().includes(keyword) || s.category.toLowerCase().includes(keyword));
+    renderScripts(filtered);
+}
+
+function filterCategory(cat, btn) {
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if(cat === 'Tất cả') {
+        renderScripts();
+    } else {
+        let filtered = scripts.filter(s => s.category.toUpperCase() === cat.toUpperCase());
+        renderScripts(filtered);
+    }
+}
+
+// Khởi chạy khi tải trang
+renderCategories();
+renderScripts();
 
 
 
