@@ -38,6 +38,14 @@
             position: fixed;
             height: 100vh;
             z-index: 100;
+            overflow: hidden; /* Đã sửa: khóa cuộn toàn cục sidebar */
+        }
+
+        .sidebar > div:first-child {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            overflow: hidden; /* Đã sửa: giúp giới hạn khung chứa danh mục */
         }
 
         .brand-box {
@@ -51,6 +59,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 40px;
+            flex-shrink: 0;
         }
 
         .nav-menu {
@@ -58,7 +67,8 @@
             flex-direction: column;
             gap: 10px;
             flex-grow: 1;
-            overflow-y: auto;
+            overflow-y: auto; /* Đã sửa: tạo thanh cuộn riêng cho phần danh mục */
+            padding-right: 4px;
         }
 
         .nav-menu::-webkit-scrollbar {
@@ -82,6 +92,7 @@
             align-items: center;
             gap: 12px;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            flex-shrink: 0;
         }
 
         .nav-item:hover, .nav-item.active {
@@ -105,6 +116,8 @@
             gap: 10px;
             transition: 0.3s;
             box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+            flex-shrink: 0; /* Đã sửa: giữ nút Admin cố định không bị bóp méo */
+            margin-top: 20px;
         }
 
         .admin-trigger:hover {
@@ -426,7 +439,6 @@
         try { getAnalytics(app); } catch(e) {}
 
         const ADMIN_PASSWORD = "baoiuhvy168";
-        // Ghi nhớ admin vĩnh viễn bằng localStorage, không cần nhập lại mật khẩu
         let isAdminLoggedIn = localStorage.getItem('isAdmin') === 'true';
 
         window.playClickSound = function() {
@@ -565,7 +577,6 @@
                 document.getElementById('scriptCategory').value = '';
                 document.getElementById('scriptCode').value = '';
             } catch (e) {
-                // Hiện chi tiết lỗi ra để bạn dễ nhận biết nếu do Firebase chặn quyền
                 alert("Lỗi kết nối Firebase: " + e.message);
                 console.error(e);
             }
